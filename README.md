@@ -1,5 +1,7 @@
 # Library_Management_System
-Library Management System is an Online Library Web Application made using **ASP.NET MVC**. It provides an easy-to-handle and automated system. It also provides various features and an interface for maintaining librarians’ records, students’ history of issues, and fines. The admin can easily update, delete and insert data in the database with this application. Can View all his past *Records*.
+Library Management System is an Online Library Web Application made using **ASP.NET MVC** in which Librarian(admin) can upload & share unlimited e-content and offers access to students in order to drive hassle-free teacher-student collaboration.Moreover, Users can search about books by author, title, publisher.The cataloguing module of the library management system enables the librarian to create books, journals, and other resources entries and create a database of the same for easy book search.
+
+
 ### Features
 > For Admin
  * Can *Approve* or *Reject* the request for any book that is requested.
@@ -10,9 +12,9 @@ Library Management System is an Online Library Web Application made using **ASP.
 * Can View all the issued books and *Return* them.
 * Can View all his past *Records*.
 
-> Landing Page
+> Home Page
 
-![Screenshot (13)](https://user-images.githubusercontent.com/109417065/184586767-abf63457-8d92-4038-8891-5298462bc32a.png)
+![Screenshot (13)](![image](https://user-images.githubusercontent.com/46960431/185978364-dd81da16-f38a-4ccb-85aa-e6143fc1b2cd.png))
 
 > Login Page
 
