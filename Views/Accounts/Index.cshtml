@@ -1,0 +1,36 @@
+﻿@model IEnumerable<LoginPage1.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+    <div>
+    <a class= "btn btn-primary" asp-action="Create">Create new User</a>
+    </div>
+
+    <h2 style="margin-top:20px; text-align:center;">Users List</h2>
+   
+    <table class="table table-hover table-dark" style="width:100%; margin-top:25px;">
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Role</th>
+           
+        </tr>
+        @foreach( var userlist in Model)
+        {
+            <tr>
+                <td>@userlist.UserId</td>
+                <td>@userlist.UserName</td>
+                <td>@userlist.Password</td>
+                <td>@userlist.Role</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@userlist.UserId">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@userlist.UserId">Details</a> |
+                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@userlist.UserId">Delete</a>
+                </td>
+            </tr>
+
+        }
+    </table>

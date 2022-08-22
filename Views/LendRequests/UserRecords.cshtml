@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LoginPage1.Models.LendRequest>
+@{
+    ViewData["Title"] = "UserRecords";
+    Layout = "_UserLayout";
+}
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+    <h2 style="margin-top:20px; text-align:center;">Your All Records</h2>
+
+    <table  class="table table-hover table-dark" style="width:100%; margin-top:25px;" >
+        <tr>
+            <th>LendId</th>
+            <th>UserName</th>
+            <th>BookName</th>
+            <th>FineAmount</th>
+            <th>Status</th>
+        </tr>
+       
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.LendId</td>
+                <td>@item.Account.UserName</td>
+                <td>@item.Book.BookTitle</td>
+                 @if(@item.FineAmount>0)
+                {
+                    <td style="color:red">₹ @item.FineAmount</td>
+                }
+                else
+                {
+                     <td style="color:green">₹ @item.FineAmount</td>
+                }
+                
+                 @if(@item.LendStatus=="Returned")
+                {
+                    <td>
+                     <span class="badge badge-pill badge-success">@item.LendStatus</span>
+                    </td>
+                }
+                else if(@item.LendStatus=="Declined")
+                {
+                     <td>
+                     <span class="badge badge-pill badge-danger">@item.LendStatus</span>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+
+

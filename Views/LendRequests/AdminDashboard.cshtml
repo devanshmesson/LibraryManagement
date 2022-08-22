@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LoginPage1.Models.LendRequest>
+
+@{
+    ViewData["Title"] = "AdminDashboard";
+    Layout = "_AdminLayout";
+}
+    <h2 style="margin-top:20px; text-align:center;">Admin's Requested Book List</h2>
+     <table  class="table table-hover table-dark" style="width:100%; margin-top:25px;">
+         <tr>
+             <th>Lend Id</th>
+             <th>Username</th>
+             <th>Book Name</th>
+             <th>Status</th>
+         </tr>
+         @foreach(var item in Model)
+        {
+            <tr>
+                 <td>@item.LendId</td>
+                 <td>@item.Account.UserName</td>
+                 <td>@item.Book.BookTitle</td>
+                 <td>
+                  @Html.ActionLink("Accept","FilterRequest","LendRequests",new{LendId=@item.LendId},new {@class= "btn btn-primary"})
+                  @Html.ActionLink("Decline","DeclineRequest","LendRequests",new{LendId=@item.LendId, BookId=@item.Book.BookId},new {@class= "btn btn-danger"})
+                 </td>
+            </tr>
+        }
+     </table>

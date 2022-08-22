@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LoginPage1.Models.Book>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = "_UserLayout";
+}
+    <form  style="margin-top:20px;" class="input-group">
+    <input name = "SearchString" type="search" class="form-control rounded " placeholder="Search by Book Name, Author and Category " aria-label="Search" aria-describedby="search-addon" />
+    <input type="submit" class="btn btn-outline-primary" value="Search" />
+    </form>
+<br>
+
+    <div class="card1" >
+    @foreach(var item in Model)
+    {
+        
+        <!--Will redirect to AdminDashboard, Adding a row will happen there-->
+     
+       <div class="card  text-white bg-dark mb-3 " style="display:inline-block; grid-template-columns : repeat(3,minmax); border-radius: 10px;  text-align:center; margin-left:5px;  margin-top:5px;" > 
+        <img class="card-img-top" src=@item.ImageUrl  style="width:200px; height:200px; margin-left:auto; margin-right:auto;" >
+        <div class="card-body" style="font-size: 15px;">
+            <h5 style="color:antiquewhite;"class="card-title">@item.BookTitle</h5>
+            <p style="font-family:'Times New Roman'; font-size:18px; font:bold;" class="card-text">No. of copies available: @item.NoOfCopies </p>
+             <p style="font-family:'Times New Roman'; font-size:18px;font:bold;" class="card-text">Author: @item.Author.AuthorName</p>
+              <p style="font-family:'Times New Roman'; font-size:18px;font:bold;" class="card-text">Category: @item.Category</p>
+               @{
+                   var IssueStatus  = (string)ViewData[@item.BookId.ToString()];
+               }
+              
+               @if(IssueStatus =="Requested")
+               {
+                 @Html.ActionLink("Requested",null,null,null,new {@class= "btn btn-success"});
+               }
+               else if(@item.NoOfCopies > 0 && (IssueStatus=="Returned" || IssueStatus==null || IssueStatus=="Declined" ) ) 
+               {
+                 @Html.ActionLink("Request To Issue","AddUserRequest","LendRequests",new{BookId=@item.BookId},new {@class= "btn btn-primary", @onclick="Requestalert()"});
+               }
+               else if(IssueStatus=="Accepted")
+               {
+                   @Html.ActionLink("Return Book","ReturnBook","LendRequests",new{BookId=@item.BookId},new {@class= "btn btn-danger", @onclick="Returnalert()"})
+               }
+               else 
+               {
+                  @Html.ActionLink("Unavailable",null,null,null,new {@class= "btn btn-secondary"});
+               }
+          </div>
+        </div>
+   
+    }
+      </div>
+
+<script>
+    function Returnalert()
+    {
+       alert("Congratulations, The Book got returned successfully!")
+    }
+    function Requestalert()
+    {
+       alert("Congratulations, The Book has been requested successfully!")
+    }
+</script>
+
